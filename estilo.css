@@ -1,0 +1,114 @@
+div#esquerda{
+    width: 40%; 
+    height: 100%;
+    float:left;
+}
+
+div#direita{
+    width: 60%; 
+    height: 100%;
+    float: right;
+}
+
+div.formulario{
+    width: 70%;
+    font-family: Arial, Tahoma, sans-serif;
+    color:rgb(61, 83, 75);
+    padding-left: 20px;
+    padding-top: 15px;
+    margin: auto; 
+ }
+
+ div#selectOrdem{
+    width: 65%;
+    font-family: Arial, Tahoma, sans-serif;
+    color:rgb(61, 83, 75);
+    padding: 10px;
+    margin: auto; 
+ }
+
+ div#excluir{
+    padding-top: 50px;  
+    float:right;
+    margin-right:60px;
+ }
+
+ input, select{
+    border: 2px solid #794270;
+    border-radius: 4px;
+    height: 25px;
+    text-align: center;  
+ }
+
+ input[type=text]{
+    width: 300px;
+ }
+
+ button{
+    background-color: #cde6da;
+    border: none;
+    font-size: 12pt;
+    color: rgb(61, 83, 75);
+    text-align: center;
+    height: 35px;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 8px;
+   
+   
+  }
+button:hover{
+    background-color: rgb(219, 188, 207);
+    border: solid 1px #794270;
+    color: #794270;
+    font-weight: bold;
+}
+
+button#cadastro{
+    float:right;
+    margin-right:20px;
+}
+
+h1{
+    font-family: Tahoma, Arial, sans-serif;
+    color:rgb(61, 83, 75);
+    padding: 15px;
+    font-size: 20pt;
+    text-align: center;
+}
+
+span{
+    font-weight: bold;
+}
+
+table{
+    width: 85%;
+    border: none;
+    border-collapse:collapse;
+    text-align: center;
+    vertical-align: middle;
+    font-family: Arial, Tahoma, sans-serif;    
+    margin: auto;
+    padding: 30px;
+}
+
+th{
+    height: 30px;
+    padding: 10px;
+    background-color: #30463f;
+    color: #d3b7c8;
+}
+
+td{
+    padding: 10px;
+    color:rgb(52, 65, 60);
+}
+
+th, td {
+    border-bottom: 1px solid #d3b7c8;
+}
+
+tr.linhas:hover {
+    background-color: #d3b7c8; 
+}
+

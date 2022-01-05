@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+<head>
+    <title>Cadastro de Alunos</title>
+    <link rel="stylesheet" type"text/css" href="estilo.css">
+
+    <script> 
+        var aAlunos = [];
+        var totalAlunos = 0;
+
+        function exibiNaTela(){
+           
+            document.getElementById("tabelaAlunos").innerHTML = "<table id='tabelaAlunos'> <tr> <th></th> <th>Aluno</th> <th>Telefone</th> <th>Data de Nascimento</th> <th>Nota final</th> <th></th> </tr>";
+            if(totalAlunos==0){
+              document.getElementById("tabelaAlunos").innerHTML += "<tr class='linhas'><td colspan='6'>Não há alunos cadastrados</td></tr>";
+            }
+            else{
+                for(let i = 0; i < aAlunos.length; i++){
+                    document.getElementById("tabelaAlunos").innerHTML += "<tr class='linhas'><td><input type='checkbox' class='checkAlunos'></td><td>" + aAlunos[i].nome + "</td><td>" + aAlunos[i].telefone + "</td><td>" + aAlunos[i].dNascimento + "</td><td>" + aAlunos[i].notaFinal + "</td><td><button onclick='editaAluno("+i+")' type='submit'>Editar</button></td></tr>";
+                }
+            }    
+        }
+
+        function cadastrarAluno(){
+            let nome = document.getElementById("nome").value;
+            let telefone = document.getElementById("telefone").value;
+            let dNascimento = document.getElementById("dNascimento").value;
+            let nota = document.getElementById("notaFinal").value;
+            
+            if((nome == "") || (telefone == "") || (dNascimento == "") || (nota == ""))
+            {
+                alert("Preencha TODOS os dados antes de concluir o cadastro!");
+            }
+            else{
+                aAlunos[totalAlunos++] = {nome:nome, telefone:telefone, dNascimento:dNascimento, notaFinal:nota};
+
+                exibiNaTela();
+            }
+        }
+
+        function editaAluno(idAluno){
+            document.getElementById("divtitulo").innerHTML = "<h1>ATUALIZAR ALUNO</h1>";
+            
+            document.getElementById("nome").value = aAlunos[idAluno].nome;
+            document.getElementById("telefone").value = aAlunos[idAluno].telefone;
+            document.getElementById("dNascimento").value = aAlunos[idAluno].dNascimento;
+            document.getElementById("notaFinal").value = aAlunos[idAluno].notaFinal;
+            
+            document.getElementById("divbutton").innerHTML = "<button id='cadastro' onclick='atualizaAluno("+idAluno+")' type='submit'>Salvar alterações</button>";
+            
+        }
+
+        function atualizaAluno(idAluno){
+            let nome = document.getElementById("nome").value;
+            let telefone = document.getElementById("telefone").value;
+            let dNascimento = document.getElementById("dNascimento").value;
+            let nota = document.getElementById("notaFinal").value;
+            
+            aAlunos[idAluno] = {nome:nome, telefone:telefone, dNascimento:dNascimento, notaFinal:nota};
+
+            exibiNaTela();
+            
+            document.getElementById("divtitulo").innerHTML = "<h1>CADASTRAR ALUNO</h1>";
+            document.getElementById("nome").value = "";
+            document.getElementById("telefone").value = "";
+            document.getElementById("dNascimento").value = "";
+            document.getElementById("notaFinal").value = "";
+            document.getElementById("divbutton").innerHTML = "<button id='cadastro' onclick='cadastrarAluno()' type='submit'>Cadastrar</button>";
+        }
+
+        function excluirAluno(){
+            let checkAlunos = document.getElementsByClassName("checkAlunos");
+
+            for(let i = checkAlunos.length - 1; i >= 0; i--){
+               if(checkAlunos[i].checked){
+                   aAlunos.splice(i, 1);
+                   totalAlunos--;      
+                } 
+            }
+            exibiNaTela(); 
+        }
+
+        function ordenar(){
+            let ordem = document.getElementById("ordem").value;
+            let criterio = document.getElementById("criterio").value;
+            
+            if(ordem == "crescente"){
+                if(criterio == "nome"){ 
+                    aAlunos.sort((a,b)=>{return a.nome.localeCompare(b.nome);});
+                }else if(criterio == "notaFinal"){
+                    aAlunos.sort((a,b)=>{return a.notaFinal - b.notaFinal;});
+                }else{
+                    aAlunos.sort((a,b)=>{return a.dNascimento.localeCompare(b.dNascimento);});
+                }
+            }else{
+                if(criterio == "nome"){ 
+                    aAlunos.sort((a,b)=>{return b.nome.localeCompare(a.nome);});
+                }else if(criterio == "notaFinal"){ 
+                     aAlunos.sort((a,b)=>{return b.notaFinal - a.notaFinal;});
+                }else{
+                    aAlunos.sort((a,b)=>{return b.dNascimento.localeCompare(a.dNascimento);});
+                }
+            }
+            
+            exibiNaTela();
+        }
+
+    </script>        
+</head>
+
+<body>
+	<div id="esquerda">
+        <div id="divtitulo">
+            <h1>CADASTRAR ALUNO</h1>
+        </div>
+        
+        <div class="formulario">
+           <span>Nome:</span> 
+           <input id="nome" type="text" placeholder="Nome completo do aluno"></input>            
+        </div>   
+
+        <div class="formulario">
+            <span>Telefone:</span> 
+             <input id="telefone" type="tel" placeholder="(xx) xxxxxxxxx"></input>            
+        </div>
+            
+       <div class="formulario">
+            <span>Data de nascimento:</span> 
+            <input id="dNascimento" type="date"></input>            
+       </div>   
+
+       <div class="formulario">
+           <span>Nota final:</span> 
+           <input id="notaFinal" type="number" placeholder="Digite apenas números"></input>            
+        </div>          
+        <div id="divbutton" class="formulario">
+            <button id="cadastro" onclick="cadastrarAluno()" type="submit">Cadastrar</button>
+        </div>
+    
+   </div>
+
+   <div id="direita">
+        <h1>ALUNOS CADASTRADOS</h1>    
+         
+        <div id="selectOrdem">
+            <form>
+                <span>Ordenar alunos por:</span>
+                <select id="criterio">
+                    <option value="nome"> Nome do aluno</option>
+                    <option value="dNascimento">Data de Nascimento</option>
+                    <option value="notaFinal">Notal final</option>
+                </select>
+                <select id="ordem">
+                    <option value="crescente">Crescente</option>
+                    <option value="decrescente">Decrecente</option>
+                </select>
+                
+                <button onclick="ordenar()" type="submit">Ordenar</button>
+            </form>
+        </div>
+        
+        <table id="tabelaAlunos">
+            <tr>
+                <th></th>
+                <th>Aluno</th>
+                <th>Telefone</th>
+                <th>Data de Nascimento</th>
+                <th>Nota final</th>
+            </tr>
+            <tr class="linhas">
+                <td colspan="5">Não há alunos cadastrados</td>
+            </tr>
+        </table>
+        <div id="excluir">
+            <button onclick="excluirAluno()" type="submit">Excluir aluno(s)</button>
+        </div>
+
+        
+    </div>
+
+
+
+</body>
+</html>
+
