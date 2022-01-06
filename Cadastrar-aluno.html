@@ -144,21 +144,20 @@
         <h1>ALUNOS CADASTRADOS</h1>    
          
         <div id="selectOrdem">
-            <form>
-                <span>Ordenar alunos por:</span>
-                <select id="criterio">
-                    <option value="nome"> Nome do aluno</option>
-                    <option value="dNascimento">Data de Nascimento</option>
-                    <option value="notaFinal">Notal final</option>
-                </select>
-                <select id="ordem">
-                    <option value="crescente">Crescente</option>
-                    <option value="decrescente">Decrecente</option>
-                </select>
+           <span>Ordenar alunos por:</span>
+           <select id="criterio">
+              <option value="nome"> Nome do aluno</option>
+              <option value="dNascimento">Data de Nascimento</option>
+              <option value="notaFinal">Notal final</option>
+            </select>
+         
+	    <select id="ordem">
+              <option value="crescente">Crescente</option>
+              <option value="decrescente">Decrecente</option>
+             </select>
                 
-                <button onclick="ordenar()" type="submit">Ordenar</button>
-            </form>
-        </div>
+             <button onclick="ordenar()" type="submit">Ordenar</button>
+         </div>
         
         <table id="tabelaAlunos">
             <tr>
